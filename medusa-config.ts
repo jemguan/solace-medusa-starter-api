@@ -90,8 +90,5 @@ export default defineConfig({
   modules: {
     ...dynamicModules,
     ...modules
-  },
-  server: {
-    port: 9000,
   }
 });
