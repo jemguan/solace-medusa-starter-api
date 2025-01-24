@@ -4,29 +4,30 @@ loadEnv(process.env.NODE_ENV || 'development', process.cwd());
 
 const dynamicModules = {};
 
-const stripeApiKey = process.env.STRIPE_API_KEY;
-const stripeWebhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+// 注释掉 Stripe 支付模块
+// const stripeApiKey = process.env.STRIPE_API_KEY;
+// const stripeWebhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
-const isStripeConfigured = Boolean(stripeApiKey) && Boolean(stripeWebhookSecret);
+// const isStripeConfigured = Boolean(stripeApiKey) && Boolean(stripeWebhookSecret);
 
-if (isStripeConfigured) {
-  console.log('Stripe API key and webhook secret found. Enabling payment module');
-  dynamicModules[Modules.PAYMENT] = {
-    resolve: '@medusajs/medusa/payment',
-    options: {
-      providers: [
-        {
-          resolve: '@medusajs/medusa/payment-stripe',
-          id: 'stripe',
-          options: {
-            apiKey: stripeApiKey,
-            webhookSecret: stripeWebhookSecret
-          }
-        }
-      ]
-    }
-  };
-}
+// if (isStripeConfigured) {
+//   console.log('Stripe API key and webhook secret found. Enabling payment module');
+//   dynamicModules[Modules.PAYMENT] = {
+//     //resolve: '@medusajs/medusa/payment',
+//     options: {
+//       providers: [
+//         {
+//           resolve: '@medusajs/medusa/payment-stripe',
+//           id: 'stripe',
+//           options: {
+//             apiKey: stripeApiKey,
+//             webhookSecret: stripeWebhookSecret
+//           }
+//         }
+//       ]
+//     }
+//   };
+// }
 
 const modules = {
   [Modules.FILE]: {
@@ -48,28 +49,29 @@ const modules = {
       ]
     }
   },
-  [Modules.NOTIFICATION]: {
-    resolve: '@medusajs/medusa/notification',
-    options: {
-      providers: [
-        {
-          resolve: './src/modules/resend-notification',
-          id: 'resend-notification',
-          options: {
-            channels: ['email'],
-            apiKey: process.env.RESEND_API_KEY,
-            fromEmail: process.env.RESEND_FROM_EMAIL,
-            replyToEmail: process.env.RESEND_REPLY_TO_EMAIL,
-            toEmail: process.env.TO_EMAIL,
-            enableEmails: process.env.ENABLE_EMAIL_NOTIFICATIONS
-          }
-        }
-      ]
-    }
-  }
+  // 注释掉 Resend 邮件通知模块
+  // [Modules.NOTIFICATION]: {
+  //   resolve: '@medusajs/medusa/notification',
+  //   options: {
+  //     providers: [
+  //       {
+  //         resolve: './src/modules/resend-notification',
+  //         id: 'resend-notification',
+  //         options: {
+  //           channels: ['email'],
+  //           apiKey: process.env.RESEND_API_KEY,
+  //           fromEmail: process.env.RESEND_FROM_EMAIL,
+  //           replyToEmail: process.env.RESEND_REPLY_TO_EMAIL,
+  //           toEmail: process.env.TO_EMAIL,
+  //           enableEmails: process.env.ENABLE_EMAIL_NOTIFICATIONS
+  //         }
+  //       }
+  //     ]
+  //   }
+  // }
 };
 
-module.exports = defineConfig({
+export default defineConfig({
   admin: {
     backendUrl: process.env.MEDUSA_BACKEND_URL,
     disable: process.env.DISABLE_MEDUSA_ADMIN === 'true'
@@ -87,5 +89,8 @@ module.exports = defineConfig({
   modules: {
     ...dynamicModules,
     ...modules
+  },
+  server: {
+    port: 9000,
   }
 });
