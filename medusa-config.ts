@@ -80,8 +80,8 @@ const modules = {
 
 export default defineConfig({
   admin: {
-    serve: true,  // 确保管理面板被服务
-    path: "/app"  // 管理面板的路径
+    backendUrl: process.env.MEDUSA_BACKEND_URL,
+    path: "/app"
   },
   projectConfig: {
     databaseUrl: process.env.DATABASE_URL,
