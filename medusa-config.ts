@@ -80,8 +80,8 @@ const modules = {
 
 export default defineConfig({
   admin: {
-    path: "/app",
-    backendUrl: process.env.MEDUSA_BACKEND_URL
+    backendUrl: process.env.MEDUSA_BACKEND_URL,
+    disable: false
   },
   projectConfig: {
     databaseUrl: process.env.DATABASE_URL,
