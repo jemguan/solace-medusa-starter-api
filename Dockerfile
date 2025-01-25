@@ -15,5 +15,5 @@ RUN yarn install
 # 构建后端
 RUN yarn build
 
-# 启动命令：先迁移数据库，创建管理员用户，然后启动服务
-CMD yarn db:migrate && medusa user -e admin@example.com -p admin123456 && yarn start
+# 启动命令：只需要迁移数据库和启动服务
+CMD yarn db:migrate && yarn start

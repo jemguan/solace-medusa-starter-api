@@ -80,8 +80,8 @@ const modules = {
 
 export default defineConfig({
   admin: {
-    backendUrl: process.env.MEDUSA_BACKEND_URL,
-    disable: true  // 禁用内置管理面板
+    serve: true,  // 确保管理面板被服务
+    path: "/app"  // 管理面板的路径
   },
   projectConfig: {
     databaseUrl: process.env.DATABASE_URL,
