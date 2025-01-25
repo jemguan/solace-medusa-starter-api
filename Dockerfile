@@ -12,7 +12,10 @@ RUN apt-get update && apt-get install -y python3 python3-pip python-is-python3
 
 RUN yarn install
 
-# 构建后端和管理面板
-RUN yarn build && yarn build:admin
+# 构建后端
+RUN yarn build
+
+# 禁用遥测
+RUN yarn medusa telemetry --disable
 
 CMD yarn db:migrate && yarn start
