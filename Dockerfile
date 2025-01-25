@@ -15,7 +15,4 @@ RUN yarn install
 # 构建后端
 RUN yarn build
 
-# 禁用遥测
-RUN yarn medusa telemetry --disable
-
 CMD yarn db:migrate && yarn start

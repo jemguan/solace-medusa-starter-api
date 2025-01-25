@@ -81,7 +81,7 @@ const modules = {
 export default defineConfig({
   admin: {
     backendUrl: process.env.MEDUSA_BACKEND_URL,
-    disable: process.env.DISABLE_MEDUSA_ADMIN === 'true'
+    disable: true  // 禁用内置管理面板
   },
   projectConfig: {
     databaseUrl: process.env.DATABASE_URL,
