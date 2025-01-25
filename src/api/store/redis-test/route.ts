@@ -3,9 +3,9 @@ import type {
   ICacheService 
 } from "@medusajs/types"
 
-// 配置跳过认证
+// 配置跳过 API key 验证
 export const OPTIONS = {
-  authenticate: false
+  requireApiKey: false
 }
 
 export const GET = async (
@@ -36,4 +36,4 @@ export const GET = async (
       details: "Redis connection failed"
     });
   }
-}
+} 

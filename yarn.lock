@@ -2684,6 +2684,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@medusajs/cache-redis@npm:^2.3.1":
+  version: 2.3.1
+  resolution: "@medusajs/cache-redis@npm:2.3.1"
+  dependencies:
+    ioredis: ^5.4.1
+  peerDependencies:
+    "@medusajs/framework": ^2.0.0
+    awilix: ^8.0.1
+  checksum: d4c0f206f128f23a4c4e80f942e2415208e0b80bce6b9958a0d6638cce399e416b73a621d694c7d797a8b27795aa464369c4ae27bf21e02ab821627f91c3b27c
+  languageName: node
+  linkType: hard
+
 "@medusajs/cart@npm:^2.1.0":
   version: 2.1.0
   resolution: "@medusajs/cart@npm:2.1.0"
@@ -12384,6 +12396,7 @@ __metadata:
   resolution: "medusa-starter-default@workspace:."
   dependencies:
     "@medusajs/admin-sdk": 2.1.0
+    "@medusajs/cache-redis": ^2.3.1
     "@medusajs/cli": 2.1.0
     "@medusajs/framework": 2.1.0
     "@medusajs/medusa": 2.1.0

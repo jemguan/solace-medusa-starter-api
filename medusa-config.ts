@@ -49,6 +49,13 @@ const modules = {
       ]
     }
   },
+  cacheService: {
+    resolve: "@medusajs/cache-redis",
+    options: { 
+      redisUrl: process.env.REDIS_URL,
+      ttl: 30,
+    },
+  },
   // 注释掉 Resend 邮件通知模块
   // [Modules.NOTIFICATION]: {
   //   resolve: '@medusajs/medusa/notification',

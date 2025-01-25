@@ -3,8 +3,8 @@ import type {
   ICacheService 
 } from "@medusajs/types"
 
-// 配置跳过认证
 export const OPTIONS = {
+  requireApiKey: false,
   authenticate: false
 }
 
@@ -27,13 +27,17 @@ export const GET = async (
         key: "test-key",
         value: value,
         connection: "Redis connection successful"
-      }
+      },
+      server_time: new Date().toISOString(),
+      environment: process.env.NODE_ENV
     });
   } catch (error) {
     return res.status(500).json({
       success: false,
       error: error.message,
-      details: "Redis connection failed"
+      details: "Redis connection failed",
+      server_time: new Date().toISOString(),
+      environment: process.env.NODE_ENV
     });
   }
-}
+} 
