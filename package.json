@@ -13,7 +13,7 @@
     "medusa"
   ],
   "scripts": {
-    "build": "medusa build",
+    "build": "medusa build && medusa admin build",
     "seed": "medusa seed",
     "start": "medusa start",
     "dev": "medusa develop",
