@@ -5,27 +5,29 @@ WORKDIR /app/medusa
 # 复制 package.json 和 yarn.lock
 COPY package.json yarn.lock ./
 
-# 启用 yarn 3.2.3
+# 启用 yarn 3.2.3 并安装依赖
 RUN corepack enable && \
     corepack prepare yarn@3.2.3 --activate && \
-    yarn set version 3.2.3
+    yarn set version 3.2.3 && \
+    yarn config set nodeLinker node-modules && \
+    yarn install --frozen-lockfile
 
-# 安装依赖
+# 安装系统依赖
 RUN apt-get update && \
     apt-get install -y python3 python3-pip python-is-python3
-
-# 安装依赖
-RUN yarn install
 
 # 复制所有源代码
 COPY . .
 
 # 构建后端和 admin UI
-RUN yarn build && \
-    yarn cache clean
+RUN NODE_ENV=production yarn build
+
+# 清理不必要的文件
+RUN yarn cache clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # 设置环境变量
 ENV NODE_ENV=production
 
-# 启动命令：迁移数据库和启动服务
+# 启动命令
 CMD yarn db:migrate && yarn start
