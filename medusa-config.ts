@@ -52,14 +52,14 @@ const modules = {
   cacheService: {
     resolve: "@medusajs/cache-redis",
     options: { 
-      redisUrl: process.env.REDIS_URL,
+      redisUrl: `redis${process.env.REDIS_TLS === 'true' ? 's' : ''}://${process.env.REDIS_USERNAME}:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
       ttl: 30,
     },
   },
   eventBus: {
     resolve: "@medusajs/event-bus-redis",
     options: {
-      redisUrl: process.env.REDIS_URL,
+      redisUrl: `redis${process.env.REDIS_TLS === 'true' ? 's' : ''}://${process.env.REDIS_USERNAME}:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
     },
   },
   // 注释掉 Resend 邮件通知模块
