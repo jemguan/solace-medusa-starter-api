@@ -56,6 +56,12 @@ const modules = {
       ttl: 30,
     },
   },
+  eventBus: {
+    resolve: "@medusajs/event-bus-redis",
+    options: {
+      redisUrl: process.env.REDIS_URL,
+    },
+  },
   // 注释掉 Resend 邮件通知模块
   // [Modules.NOTIFICATION]: {
   //   resolve: '@medusajs/medusa/notification',
