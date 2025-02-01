@@ -20,7 +20,10 @@ RUN apt-get update && \
 COPY . .
 
 # 构建后端和 admin UI
-RUN NODE_ENV=production yarn build
+RUN yarn build && \
+    mkdir -p .medusa/admin && \
+    cp -r node_modules/@medusajs/admin-ui/dist/* .medusa/admin/ && \
+    cp node_modules/@medusajs/admin-ui/dist/index.html .medusa/admin/
 
 # 清理不必要的文件
 RUN yarn cache clean && \
