@@ -79,14 +79,15 @@ const modules = {
 };
 
 export default defineConfig({
-  admin: {
-    backendUrl: process.env.MEDUSA_BACKEND_URL,
-    // 禁用内置管理面板
-    disable: false
-  },
   projectConfig: {
-    databaseUrl: process.env.DATABASE_URL,
-    redisUrl: process.env.REDIS_URL,
+    database_type: "postgres",
+    database_url: process.env.DATABASE_URL,
+    database_extra: {
+      ssl: {
+        rejectUnauthorized: false
+      }
+    },
+    redis_url: process.env.REDIS_URL,
     http: {
       storeCors: process.env.STORE_CORS,
       adminCors: process.env.ADMIN_CORS,
@@ -94,6 +95,10 @@ export default defineConfig({
       jwtSecret: process.env.JWT_SECRET || 'supersecret',
       cookieSecret: process.env.COOKIE_SECRET || 'supersecret'
     }
+  },
+  admin: {
+    backendUrl: process.env.MEDUSA_BACKEND_URL,
+    disable: false
   },
   modules: {
     ...dynamicModules,
