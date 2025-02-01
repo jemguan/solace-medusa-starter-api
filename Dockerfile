@@ -22,8 +22,7 @@ COPY . .
 # 构建后端和 admin UI
 RUN yarn build && \
     mkdir -p .medusa/admin && \
-    cp -r node_modules/@medusajs/admin-ui/dist/* .medusa/admin/ && \
-    cp node_modules/@medusajs/admin-ui/dist/index.html .medusa/admin/
+    cp -r node_modules/@medusajs/admin/dist/* .medusa/admin/ || true
 
 # 清理不必要的文件
 RUN yarn cache clean && \
