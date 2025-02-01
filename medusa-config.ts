@@ -80,18 +80,14 @@ const modules = {
 
 export default defineConfig({
   projectConfig: {
-    database: {
-      type: "postgres",
-      url: process.env.DATABASE_URL,
-      extra: {
-        ssl: {
-          rejectUnauthorized: false
-        }
+    database_type: "postgres",
+    database_url: process.env.DATABASE_URL,
+    database_extra: {
+      ssl: {
+        rejectUnauthorized: false
       }
     },
-    redis: {
-      url: process.env.REDIS_URL
-    },
+    redis_url: process.env.REDIS_URL,
     http: {
       storeCors: process.env.STORE_CORS,
       adminCors: process.env.ADMIN_CORS,
