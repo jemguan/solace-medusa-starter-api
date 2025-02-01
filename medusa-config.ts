@@ -80,14 +80,18 @@ const modules = {
 
 export default defineConfig({
   projectConfig: {
-    database_type: "postgres",
-    database_url: process.env.DATABASE_URL,
-    database_extra: {
-      ssl: {
-        rejectUnauthorized: false
+    database: {
+      type: "postgres",
+      url: process.env.DATABASE_URL,
+      extra: {
+        ssl: {
+          rejectUnauthorized: false
+        }
       }
     },
-    redis_url: process.env.REDIS_URL,
+    redis: {
+      url: process.env.REDIS_URL
+    },
     http: {
       storeCors: process.env.STORE_CORS,
       adminCors: process.env.ADMIN_CORS,
@@ -98,9 +102,7 @@ export default defineConfig({
   },
   admin: {
     backendUrl: process.env.MEDUSA_BACKEND_URL,
-    disable: false,
-    serve: true,
-    path: '/app'
+    disable: false
   },
   modules: {
     ...dynamicModules,
